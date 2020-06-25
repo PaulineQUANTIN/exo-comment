@@ -28,8 +28,11 @@ class App extends Component {
     })
   }
 
-  deleteComment = () => {
-
+  deleteComment = (id) => {
+    let comments = this.state.comments.filter(comment => comment.id !== id);
+    this.setState({
+      comments: comments
+    })
   }
 
   changeMode = () => { 
@@ -37,7 +40,6 @@ class App extends Component {
         isAdmin: !this.state.isAdmin
     })
  }
-
 
   render() { 
 
@@ -48,7 +50,7 @@ class App extends Component {
         <div className="columns">
             <CommentForm addComment={this.addComment}/>
 
-            <CommentList comments={this.state.comments} isAdmin={this.state.isAdmin}/>
+            <CommentList comments={this.state.comments} isAdmin={this.state.isAdmin} deleteComment={this.deleteComment}/>
         </div>
         
       </div>

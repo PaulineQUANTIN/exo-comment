@@ -5,7 +5,7 @@ class CommentList extends Component {
     }
 
     render() { 
-        let isVisible = this.props.isAdmin ? <button class="delete is-pulled-right"></button> : "";
+        let isVisible = this.props.isAdmin ? "" : "";
         let commentsList = this.props.comments.map(comment => {
             return <article className="media">
                         <div className="media-content">
@@ -14,7 +14,7 @@ class CommentList extends Component {
                                     <strong>{comment.name}</strong>
                                     <br></br>
                                     {comment.message}
-                                    {isVisible}
+                                    <button onClick={() => {this.props.deleteComment(comment.id)}} className="delete is-pulled-right"></button>
                                 </p>
                             </div>
                         </div>
