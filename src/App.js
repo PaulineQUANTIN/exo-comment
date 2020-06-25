@@ -1,26 +1,59 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import './App.scss';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import CommentList from "./CommentList";
+import AdminMode from "./AdminMode";
+import CommentForm from "./CommentForm";
+
+import 'bulma/css/bulma.css'
+import { v4 as uuidv4 } from 'uuid';
+
+class App extends Component {
+  state = { 
+    comments: [  
+      { id: 1,name: "JB", message: "Youhou la famille!"},
+      { id: 2, name: "Kirikou", message: "Je ne suis pas grand mais je suis vaillant"}
+    ],
+    isAdmin: false,
+   }
+
+  addComment = (name, message) => {
+    let newComment = {
+      id: uuidv4(),
+      name: name,
+      message: message
+    }
+    this.setState({
+      comments: [...this.state.comments,newComment]
+    })
+  }
+
+  deleteComment = () => {
+
+  }
+
+  changeMode = () => { 
+    this.setState({ 
+        isAdmin: !this.state.isAdmin
+    })
+ }
+
+
+  render() { 
+
+    return ( 
+      <div className="App container">
+
+        <AdminMode changeMode={this.changeMode} isAdmin={this.state.isAdmin}/>
+        <div className="columns">
+            <CommentForm addComment={this.addComment}/>
+
+            <CommentList comments={this.state.comments} isAdmin={this.state.isAdmin}/>
+        </div>
+        
+      </div>
+     );
+  }
 }
-
+ 
 export default App;
