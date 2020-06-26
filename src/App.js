@@ -5,7 +5,6 @@ import CommentList from "./CommentList";
 import AdminMode from "./AdminMode";
 import CommentForm from "./CommentForm";
 
-import 'bulma/css/bulma.css'
 import { v4 as uuidv4 } from 'uuid';
 
 class App extends Component {
@@ -47,7 +46,7 @@ class App extends Component {
       <div className="App container">
 
         <AdminMode changeMode={this.changeMode} isAdmin={this.state.isAdmin}/>
-        <div className="columns">
+        <div className="columns is-variable is-6">
             <CommentForm addComment={this.addComment}/>
 
             <CommentList comments={this.state.comments} isAdmin={this.state.isAdmin} deleteComment={this.deleteComment}/>
